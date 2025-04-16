@@ -9,7 +9,7 @@ export const initMongoDB = async () => {
     const url = env('MONGODB_URL');
 
     await mongoose.connect(
-      `mongodb+srv://${user}:${pwd}${url}/Slim-Mom?retryWrites=true&w=majority`,
+      `mongodb+srv://${user}:${pwd}${url}/slim-mom?retryWrites=true&w=majority&appName=slim-mom`,
     );
     console.log('Mongo connection successfully established!');
   } catch (e) {
