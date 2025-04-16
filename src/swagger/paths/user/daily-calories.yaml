@@ -1,0 +1,42 @@
+tags:
+  - User
+summary: Get user's daily calories by date
+description: This endpoint allows user to get daily calories by date
+operationId: getUserDailyCalories
+security:
+  - bearerAuth: []
+parameters:
+  - name: date
+    in: query
+    description: Date
+    required: true
+    schema:
+      type: string
+      format: date
+responses:
+  '200':
+    description: User's daily calories by date
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            code:
+              type: number
+              example: 200
+            message:
+              type: string
+              example: User's daily calories by date
+            date:
+              type: string
+              format: date
+              example: 2025-12-31
+            dailyCalories:
+              type: number
+              example: 2000
+  '400':
+    $ref: '../../components/responses/400.yaml'
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '404':
+    $ref: '../../components/responses/404.yaml'

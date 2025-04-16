@@ -1,0 +1,20 @@
+description: Unauthorized error
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - message
+        - data
+      properties:
+        message:
+          type: string
+          example: UnauthorizedError
+        data:
+          type: object
+          required:
+            - message
+          properties:
+            message:
+              type: string
+              example: 'Access token expired'

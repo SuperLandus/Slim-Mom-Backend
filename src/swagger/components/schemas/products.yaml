@@ -1,0 +1,38 @@
+type: object
+required:
+  - categories
+  - weight
+  - title
+  - calories
+  - groupBloodTypeNotAllowed
+properties:
+  _id:
+    description: "Product's id"
+    type: string
+    example: 5d51694902b2373622ff5d52
+  categories:
+    description: "Product's category"
+    type: string
+    example: 'Vegetables and Herbs'
+  weight:
+    description: "Product's weight"
+    type: number
+    example: 100
+  title:
+    description: "Product's name"
+    type: string
+    example: 'Amaranth Leaves'
+  calories:
+    description: "Product's Calories"
+    type: number
+    example: 23
+  groupBloodNotAllowed:
+    description: 'Product not allowed for blood types:'
+    type: array
+    example: '[
+      null,
+      false,
+      false,
+      false,
+      false
+      ]'

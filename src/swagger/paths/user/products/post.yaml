@@ -1,0 +1,59 @@
+tags:
+  - User
+summary: Add a product to the user's daily
+operationId: addProductToUsersDaily
+description: "Add a product to the user's daily"
+security:
+  - bearerAuth: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - productId
+          - date
+          - productWeight
+        properties:
+          productId:
+            type: date
+            example: 67d5d211fa93b3b9e8962774
+          date:
+            type: string
+            format: date
+            example: 2025-12-31
+          productWeight:
+            type: number
+            example: 100
+responses:
+  '201':
+    description: Product added to the user's daily
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            code:
+              type: number
+              example: 201
+            message:
+              type: string
+              example: Product added to my products successfuly
+            product:
+              type: object
+              properties:
+                productId:
+                  type: string
+                  example: 67d5d211fa93b3b9e8962774
+                date:
+                  type: string
+                  format: date
+                  example: 2025-12-31
+                productWeight:
+                  type: number
+                  example: 100
+  '400':
+    $ref: '../../../components/responses/400.yaml'
+  '401':
+    $ref: '../../../components/responses/401.yaml'

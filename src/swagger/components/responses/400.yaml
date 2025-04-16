@@ -1,0 +1,15 @@
+description: 'Bad Request – The server cannot process the request due to client error.'
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - status
+        - message
+      properties:
+        status:
+          type: integer
+          example: 400
+        message:
+          type: string
+          example: 'Invalid request. Please check the provided data.'

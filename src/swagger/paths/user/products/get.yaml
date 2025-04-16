@@ -1,0 +1,50 @@
+tags:
+  - User
+summary: Get all products of the user for the selected date
+operationId: getAllProductsOfUserForSelectedDate
+description: 'Get all products of the user for the selected date'
+security:
+  - bearerAuth: []
+parameters:
+  - name: date
+    in: query
+    required: true
+    schema:
+      type: string
+      format: date
+      example: 2025-12-31
+responses:
+  '200':
+    description: Products of the user for the selected date
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            code:
+              type: number
+              example: 200
+            message:
+              type: string
+              example: Successfully got products!
+            products:
+              type: array
+              items:
+                type: object
+                properties:
+                  productId:
+                    type: string
+                    example: 67d5d211fa93b3b9e8962774
+                  date:
+                    type: string
+                    format: date
+                    example: 2025-12-31
+                  productWeight:
+                    type: number
+                    example: 100
+  '400':
+    $ref: '../../../components/responses/400.yaml'
+  '401':
+    $ref: '../../../components/responses/401.yaml'
+  '404':
+    $ref: '../../../components/responses/404.yaml'

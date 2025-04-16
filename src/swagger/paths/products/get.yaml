@@ -1,0 +1,37 @@
+tags:
+  - Products
+summary: Get products by search query
+operationId: getProducts
+description: 'Get products by search query'
+security:
+  - bearerAuth: []
+parameters:
+  - in: query
+    name: title
+    required: true
+    schema:
+      type: string
+      example: 'amaranth'
+responses:
+  '200':
+    description: 'Get products matching the search query'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Products matching your search!
+            data:
+              type: object
+              $ref: '../../../swagger/components/schemas/products.yaml'
+  '404':
+    $ref: '../../../swagger/components/responses/404.yaml'

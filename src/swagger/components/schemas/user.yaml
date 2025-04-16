@@ -1,0 +1,22 @@
+type: object
+required:
+  - name
+  - email
+  - password
+properties:
+  _id:
+    description: "Student's id"
+    type: string
+    example: 65e4decdd286b30065d54af9
+  name:
+    description: "Student's name"
+    type: string
+    example: 'John Doe'
+  email:
+    description: "Student's email"
+    type: string
+    example: 'johndoe@gmail.com'
+  password:
+    description: "Student's password"
+    type: string
+    example: '12345678'

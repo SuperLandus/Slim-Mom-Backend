@@ -1,0 +1,24 @@
+tags:
+  - User
+summary: Delete product by id for selected date
+description: This endpoint allows user to delete product by id for selected date
+operationId: deleteUserProduct
+parameters:
+  - name: productId
+    in: path
+    description: Product id
+    required: true
+    schema:
+      type: string
+  - name: date
+    in: query
+    description: Date
+    required: true
+    schema:
+      type: string
+      format: date
+responses:
+  '204':
+    description: Product deleted successfully and no content to return
+  '400':
+    $ref: '../../../components/responses/400.yaml'

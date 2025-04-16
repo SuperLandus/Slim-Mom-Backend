@@ -1,0 +1,76 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Slim Mom App
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  description: >
+    This is a documentation of slim mom app
+tags:
+  - name: Products
+    description: Operations about products.
+  - name: Auth
+    description: Auth operations.
+  - name: Users
+    description: Operations about users and their products.
+servers:
+  - url: https://slimmom-backend-s8n8.onrender.com/
+  - url: https://localhost:3000/
+paths:
+  /register:
+    post:
+      $ref: ../swagger/paths/auth/register/post.yaml
+      tags:
+        - Auth
+  /login:
+    post:
+      $ref: ../swagger/paths/auth/login/post.yaml
+      tags:
+        - Auth
+  /logout:
+    post:
+      $ref: ../swagger/paths/auth/logout/post.yaml
+      tags:
+        - Auth
+  /products/searchProducts:
+    get:
+      $ref: ../swagger/paths/products/get.yaml
+      tags:
+        - Products
+  /user/products:
+    post:
+      $ref: ../swagger/paths/user/products/post.yaml
+      tags:
+        - Users
+    get:
+      $ref: ../swagger/paths/user/products/get.yaml
+      tags:
+        - Users
+  /user/products/{productId}:
+    delete:
+      $ref: ../swagger/paths/user/products/delete.yaml
+      tags:
+        - Users
+  /user/my-daily-calories:
+    get:
+      $ref: '../swagger/paths/user/daily-calories.yaml'
+      tags:
+        - Users
+  /user/my-daily-calory-needs:
+    get:
+      $ref: '../swagger/paths/user/my-daily-calory-needs.yaml'
+      tags:
+        - Users
+  /user/daily-calory-needs:
+    post:
+      $ref: '../swagger/paths/user/daily-calory-needs.yaml'
+      tags:
+        - Users
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,64 @@
+tags:
+  - User
+summary: Get user's daily calory needs per day for given informations
+description: This endpoint allows user to get calory needs per day for given informations
+operationId: getDailyRate
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - weight
+          - height
+          - age
+          - desiredWeight
+          - bloodType
+        properties:
+          weight:
+            type: number
+            example: 70
+          height:
+            type: number
+            example: 180
+          age:
+            type: number
+            example: 25
+          desiredWeight:
+            type: number
+            example: 65
+          bloodType:
+            type: number
+            example: 1
+security: []
+responses:
+  '200':
+    description: User's calory needs per day
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            code:
+              type: number
+              example: 200
+            status:
+              type: string
+              example: success
+            message:
+              type: string
+              example: successfully got daily rate!
+            data:
+              type: object
+              properties:
+                dailyRate:
+                  type: number
+                  example: 2000
+                notAllowedFoods:
+                  type: array
+                  items:
+                    type: string
+                  example: ['sugar', 'salt']
+  '400':
+    $ref: '../../components/responses/400.yaml'
