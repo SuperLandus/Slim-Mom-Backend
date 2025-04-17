@@ -29,55 +29,31 @@ export const getMyDailyRateController = async (req, res, next) => {
   if (!req.user) {
     next(createHttpError(401, 'You are not authorized!'));
   }
-  const currentWeight = Number(req.user.currentWeight);
-  const height = Number(req.user.height);
-  const age = Number(req.user.age);
-  const desiredWeight = Number(req.user.desiredWeight);
-  const bloodType = Number(req.user.bloodType);
 
-  const notAllowedFoods = await getNotAllowedFoodsService(bloodType);
-
-  const dailyRate = calculateDailyCalory({
+  const {
     currentWeight,
-    height,
-    age,
-    desiredWeight,
-  });
-
-  res.status(200).json({
-    status: 200,
-    message: 'successfully got daily rate!',
-    data: { dailyRate, notAllowedFoods },
-  });
-};
-
-export const updateMyDailyRateController = async (req, res, next) => {
-  if (!req.user) {
-    next(createHttpError(401, 'You are not authorized!'));
-  }
-  const currentWeight = Number(req.user.currentWeight);
-  const height = Number(req.user.height);
-  const age = Number(req.user.age);
-  const desiredWeight = Number(req.user.desiredWeight);
-  const bloodType = Number(req.user.bloodType);
-
-  const notAllowedFoods = await getNotAllowedFoodsService(bloodType);
-
-  const dailyRate = calculateDailyCalory({
-    currentWeight,
-    height,
-    age,
-    desiredWeight,
-  });
-
-  const owner = req.user._id;
-  updateUserInfo({
-    owner,
-    currentWeight,
-    height,
+    height: height, // typo düzeltmesi: 'heigth' → 'height'
     age,
     desiredWeight,
     bloodType,
+  } = req.body;
+
+  const notAllowedFoods = await getNotAllowedFoodsService(bloodType);
+
+  const dailyRate = calculateDailyCalory({
+    currentWeight,
+    height,
+    age,
+    desiredWeight,
+  });
+  const owner = req.user._id;
+  await updateUserInfo({
+    owner,
+    currentWeight: Number(currentWeight),
+    height: Number(height),
+    age: Number(age),
+    desiredWeight: Number(desiredWeight),
+    bloodType: Number(bloodType),
     dailyRate,
     notAllowedFoods,
   });
