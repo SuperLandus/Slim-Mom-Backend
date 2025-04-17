@@ -2,7 +2,7 @@
 
 **Slim-Mom** projesine hoş geldiniz. Bu proje, [**SuperLandus**]() adlı ekibin çalışmasıdır.
 
-[![Static Badge](https://img.shields.io/badge/visit-SlimMom%20Swagger-%FF9D23?style=for-the-badge)](https://slimmom-backend-s8n8.onrender.com/api-docs/)
+[![Static Badge](https://img.shields.io/badge/visit-SlimMom%20Swagger-%FF9D23?style=for-the-badge)](https://slim-mom-backend-nbxd.onrender.com/api-docs)
 
 ## ![alt](./src/assets/Backend%20Readme.png)
 
