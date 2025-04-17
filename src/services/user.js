@@ -17,9 +17,9 @@ export const getProductsForDateService = async (owner, date) => {
     .select('-owner -__v ');
 };
 
-export const updateUserInfo = async (owner, payload) => {
+export const updateUserInfo = async (payload) => {
   return UserCollection.findOneAndUpdate(
-    { _id: owner }, // Query to find the user by their unique ID
+    { _id: payload.owner }, // Query to find the user by their unique ID
     {
       currentWeight: payload.currentWeight,
       height: payload.height,

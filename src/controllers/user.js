@@ -59,19 +59,28 @@ export const updateMyDailyRateController = async (req, res, next) => {
   const height = Number(req.user.height);
   const age = Number(req.user.age);
   const desiredWeight = Number(req.user.desiredWeight);
-    const bloodType = Number(req.user.bloodType);
-    
-    
-    const notAllowedFoods = await getNotAllowedFoodsService(bloodType);
-    
-    const dailyRate = calculateDailyCalory({
-        currentWeight,
-        height,
-        age,
-        desiredWeight,
-    });
-    
-    updateUserInfo({ currentWeight, height, age, desiredWeight, bloodType, dailyRate, notAllowedFoods });
+  const bloodType = Number(req.user.bloodType);
+
+  const notAllowedFoods = await getNotAllowedFoodsService(bloodType);
+
+  const dailyRate = calculateDailyCalory({
+    currentWeight,
+    height,
+    age,
+    desiredWeight,
+  });
+
+  const owner = req.user._id;
+  updateUserInfo({
+    owner,
+    currentWeight,
+    height,
+    age,
+    desiredWeight,
+    bloodType,
+    dailyRate,
+    notAllowedFoods,
+  });
   res.status(200).json({
     status: 200,
     message: 'successfully got daily rate!',
