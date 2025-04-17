@@ -2,6 +2,7 @@ import { Router } from 'express';
 import {
   getDailyRateController,
   getMyDailyRateController,
+  updateMyDailyRateController,
 } from '../controllers/user.js';
 import validateBody from '../middlewares/validateBody.js';
 import { addMyProductsSchema, getDailyRateSchema } from '../validation/user.js';
@@ -29,6 +30,11 @@ router.get(
   '/my-daily-calory-needs',
   authenticate,
   ctrlWrapper(getMyDailyRateController),
+);
+router.post(
+  '/my-daily-calory-needs',
+  authenticate,
+  ctrlWrapper(updateMyDailyRateController),
 );
 
 router.post(
