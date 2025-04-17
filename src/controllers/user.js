@@ -46,7 +46,8 @@ export const getMyDailyRateController = async (req, res, next) => {
     age,
     desiredWeight,
   });
-  const owner = req.user._id;
+    const owner = req.user._id;
+    
   await updateUserInfo({
     owner,
     currentWeight: Number(currentWeight),
