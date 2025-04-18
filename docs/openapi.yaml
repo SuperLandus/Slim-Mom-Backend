@@ -15,8 +15,8 @@ tags:
   - name: Users
     description: Operations about users and their products.
 servers:
-  - url: https://slimmom-backend-s8n8.onrender.com/
-  - url: https://localhost:3000/
+  - url: https://slimmom-backend-s8n8.onrender.com
+  - url: https://localhost:3000 # veya yerel geliştirici ortamınız için geçici bir URL
 paths:
   /register:
     post:
@@ -43,30 +43,41 @@ paths:
       $ref: ../swagger/paths/user/products/post.yaml
       tags:
         - Users
+      security:
+        - bearerAuth: []
     get:
       $ref: ../swagger/paths/user/products/get.yaml
       tags:
         - Users
+      security:
+        - bearerAuth: []
   /user/products/{productId}:
-    delete:
-      $ref: ../swagger/paths/user/products/delete.yaml
-      tags:
-        - Users
+    $ref: ../swagger/paths/user/products/delete.yaml
+    tags:
+      - Users
+    security:
+      - bearerAuth: []
   /user/my-daily-calories:
     get:
-      $ref: '../swagger/paths/user/daily-calories.yaml'
+      $ref: "../swagger/paths/user/daily-calories.yaml"
       tags:
         - Users
+      security:
+        - bearerAuth: []
   /user/my-daily-calory-needs:
     get:
-      $ref: '../swagger/paths/user/my-daily-calory-needs.yaml'
+      $ref: "../swagger/paths/user/my-daily-calory-needs.yaml"
       tags:
         - Users
+      security:
+        - bearerAuth: []
   /user/daily-calory-needs:
     post:
-      $ref: '../swagger/paths/user/daily-calory-needs.yaml'
+      $ref: "../swagger/paths/user/daily-calory-needs.yaml"
       tags:
         - Users
+      security:
+        - bearerAuth: []
 
 components:
   securitySchemes:
@@ -74,3 +85,6 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+
+security:
+  - bearerAuth: []

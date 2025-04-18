@@ -11,10 +11,17 @@
   },
   "servers": [
     {
-      "url": "https://slim-mom-backend-nbxd.onrender.com"
+      "url": "https://slim-mom-backend-nbxd.onrender.com",
+      "description": "Production server"
     },
     {
-      "url": "http://localhost:3000/"
+      "url": "http://localhost:3000",
+      "description": "Local development server"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
     }
   ],
   "tags": [
@@ -104,7 +111,7 @@
     "/login": {
       "post": {
         "tags": ["Auth"],
-        "summary": "Autherization operations",
+        "summary": "Authorization operations",
         "operationId": "login",
         "description": "Login user",
         "security": [
@@ -137,7 +144,7 @@
         },
         "responses": {
           "200": {
-            "description": "User login is okey",
+            "description": "User login is successful",
             "content": {
               "application/json": {
                 "schema": {
@@ -283,7 +290,7 @@
                 "required": ["productId", "date", "productWeight"],
                 "properties": {
                   "productId": {
-                    "type": "date",
+                    "type": "string",
                     "example": "67d5d211fa93b3b9e8962774"
                   },
                   "date": {
@@ -314,7 +321,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "Product added to my products successfuly"
+                      "example": "Product added to my products successfully"
                     },
                     "product": {
                       "type": "object",
@@ -361,6 +368,7 @@
           {
             "name": "date",
             "in": "query",
+            "description": "Date in YYYY-MM-DD format",
             "required": true,
             "schema": {
               "type": "string",
@@ -429,11 +437,16 @@
         "summary": "Delete product by id for selected date",
         "description": "This endpoint allows user to delete product by id for selected date",
         "operationId": "deleteUserProduct",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "name": "productId",
             "in": "path",
-            "description": "Product id",
+            "description": "Product ID",
             "required": true,
             "schema": {
               "type": "string"
@@ -442,7 +455,7 @@
           {
             "name": "date",
             "in": "query",
-            "description": "Date",
+            "description": "Date in YYYY-MM-DD format",
             "required": true,
             "schema": {
               "type": "string",
@@ -452,10 +465,13 @@
         ],
         "responses": {
           "204": {
-            "description": "Product deleted successfully and no content to return"
+            "description": "Product deleted successfully"
           },
           "400": {
             "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
           }
         }
       }
@@ -475,7 +491,7 @@
           {
             "name": "date",
             "in": "query",
-            "description": "Date",
+            "description": "Date in YYYY-MM-DD format",
             "required": true,
             "schema": {
               "type": "string",
@@ -528,8 +544,8 @@
     "/user/my-daily-calory-needs": {
       "get": {
         "tags": ["Users"],
-        "summary": "Get logged in user's daily calory needs per day",
-        "description": "This endpoint allows logged in user to get calory needs per day",
+        "summary": "Get logged in user's daily calorie needs per day",
+        "description": "This endpoint allows logged in user to get calorie needs per day",
         "operationId": "getMyDailyRate",
         "security": [
           {
@@ -538,7 +554,7 @@
         ],
         "responses": {
           "200": {
-            "description": "User's calory needs per day",
+            "description": "User's calorie needs per day",
             "content": {
               "application/json": {
                 "schema": {
@@ -586,9 +602,10 @@
     "/user/daily-calory-needs": {
       "post": {
         "tags": ["Users"],
-        "summary": "Get user's daily calory needs per day for given informations",
-        "description": "This endpoint allows user to get calory needs per day for given informations",
+        "summary": "Get user's daily calorie needs per day for given information",
+        "description": "This endpoint allows user to get calorie needs per day for given information",
         "operationId": "getDailyRate",
+        "security": [],
         "requestBody": {
           "required": true,
           "content": {
@@ -628,10 +645,9 @@
             }
           }
         },
-        "security": [],
         "responses": {
           "200": {
-            "description": "User's calory needs per day",
+            "description": "User's calorie needs per day",
             "content": {
               "application/json": {
                 "schema": {
@@ -691,22 +707,22 @@
         "required": ["name", "email", "password"],
         "properties": {
           "_id": {
-            "description": "Student's id",
+            "description": "User's id",
             "type": "string",
             "example": "65e4decdd286b30065d54af9"
           },
           "name": {
-            "description": "Student's name",
+            "description": "User's name",
             "type": "string",
             "example": "John Doe"
           },
           "email": {
-            "description": "Student's email",
+            "description": "User's email",
             "type": "string",
             "example": "johndoe@gmail.com"
           },
           "password": {
-            "description": "Student's password",
+            "description": "User's password",
             "type": "string",
             "example": "12345678"
           }
@@ -719,7 +735,7 @@
           "weight",
           "title",
           "calories",
-          "groupBloodTypeNotAllowed"
+          "groupBloodNotAllowed"
         ],
         "properties": {
           "_id": {
@@ -743,21 +759,24 @@
             "example": "Amaranth Leaves"
           },
           "calories": {
-            "description": "Product's Calories",
+            "description": "Product's calories",
             "type": "number",
             "example": 23
           },
           "groupBloodNotAllowed": {
-            "description": "Product not allowed for blood types:",
+            "description": "Product not allowed for blood types",
             "type": "array",
-            "example": "[ null, false, false, false, false ]"
+            "items": {
+              "type": ["boolean", "null"]
+            },
+            "example": [null, false, false, false, false]
           }
         }
       }
     },
     "responses": {
       "400": {
-        "description": "Bad Request – The server cannot process the request due to client error.",
+        "description": "Bad Request – The server cannot process the request due to client error",
         "content": {
           "application/json": {
             "schema": {

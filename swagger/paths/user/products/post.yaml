@@ -17,7 +17,8 @@ requestBody:
           - productWeight
         properties:
           productId:
-            type: date
+            type: string
+            format: date
             example: 67d5d211fa93b3b9e8962774
           date:
             type: string
@@ -27,7 +28,7 @@ requestBody:
             type: number
             example: 100
 responses:
-  '201':
+  "201":
     description: Product added to the user's daily
     content:
       application/json:
@@ -53,7 +54,7 @@ responses:
                 productWeight:
                   type: number
                   example: 100
-  '400':
-    $ref: '../../../components/responses/400.yaml'
-  '401':
-    $ref: '../../../components/responses/401.yaml'
+  "400":
+    $ref: "../../../components/responses/400.yaml"
+  "401":
+    $ref: "../../../components/responses/401.yaml"
