@@ -1,6 +1,6 @@
 # SuperLandus -> SlimMom-Backend
 
-**Slim-Mom** projesine hoş geldiniz. Bu proje, [**SuperLandus**]() adlı ekibin çalışmasıdır.
+**Slim-Mom** projesine hoş geldiniz. Bu proje, [**SuperLandus**](https://github.com/Super-Landus) adlı ekibin çalışmasıdır.
 
 [![Static Badge](https://img.shields.io/badge/visit-SlimMom%20Swagger-%FF9D23?style=for-the-badge)](https://slim-mom-backend-nbxd.onrender.com/api-docs)
 
@@ -41,7 +41,7 @@ Slim Mom, kullanıcıların günlük kalori takibini yapmasına yardımcı olan 
 
 ## Backend Render Api Docs Link
 
-[https://slim-mom-backend-nbxd.onrender.com/api-docs/](https://slim-mom-backend-nbxd.onrender.com)
+[https://slim-mom-backend-nbxd.onrender.com/api-docs/](https://slim-mom-frontend-plum.vercel.app/)
 
 ## Vercel Link
 
