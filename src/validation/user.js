@@ -18,6 +18,23 @@ export const getDailyRateSchema = Joi.object({
   bloodType: Joi.number().integer().min(1).max(4).required(),
 });
 
+export const updateDailyRateSchema = Joi.object({
+  currentWeight: Joi.number().integer().min(30).max(300),
+  height: Joi.number().integer().min(100).max(220),
+  age: Joi.number().integer().min(18).max(100),
+  desiredWeight: Joi.number()
+    .integer()
+    .min(30)
+    .max(300)
+    .when('currentWeight', {
+      is: Joi.exist(),
+      then: Joi.number().less(Joi.ref('currentWeight')).messages({
+        'number.less': '"desiredWeight" must be less than "currentWeight"',
+      }),
+    }),
+  bloodType: Joi.number().integer().min(1).max(4),
+});
+
 export const addMyProductsSchema = Joi.object({
   productId: Joi.string().required(),
   productWeight: Joi.number().required(),

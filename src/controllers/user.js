@@ -1,6 +1,10 @@
 import { calculateDailyCalory } from '../utils/calculateCalory.js';
 import createHttpError from 'http-errors';
-import { getNotAllowedFoodsService, updateUserInfo } from '../services/user.js';
+import {
+  getNotAllowedFoodsService,
+  getUserInfo,
+  updateUserInfo,
+} from '../services/user.js';
 
 export const getDailyRateController = async (req, res, next) => {
   const currentWeight = Number(req.body.currentWeight);
@@ -29,38 +33,49 @@ export const getMyDailyRateController = async (req, res, next) => {
   if (!req.user) {
     next(createHttpError(401, 'You are not authorized!'));
   }
+  const owner = req.user._id;
 
-  const {
-    currentWeight,
-    height: height, // typo düzeltmesi: 'heigth' → 'height'
-    age,
-    desiredWeight,
-    bloodType,
-  } = req.body;
+  const userInfo = await getUserInfo(owner);
 
-  const notAllowedFoods = await getNotAllowedFoodsService(bloodType);
+  const userLastInfo = {
+    currentWeight: userInfo.infouser.currentWeight,
+    height: userInfo.infouser.height,
+    age: userInfo.infouser.age,
+    bloodType: userInfo.infouser.bloodType,
+    desiredWeight: userInfo.infouser.desiredWeight,
+  };
 
-  const dailyRate = calculateDailyCalory({
-    currentWeight,
-    height,
-    age,
-    desiredWeight,
-  });
-    const owner = req.user._id;
-    
-  await updateUserInfo({
-    owner,
-    currentWeight: Number(currentWeight),
-    height: Number(height),
-    age: Number(age),
-    desiredWeight: Number(desiredWeight),
-    bloodType: Number(bloodType),
-    dailyRate,
-    notAllowedFoods,
-  });
+  const notAllowedFoods = await getNotAllowedFoodsService(
+    userLastInfo.bloodType,
+  );
+
+  const dailyRate = calculateDailyCalory(
+    userLastInfo.currentWeight,
+    userLastInfo.height,
+    userLastInfo.age,
+    userLastInfo.desiredWeight,
+  );
+
   res.status(200).json({
     status: 200,
     message: 'successfully got daily rate!',
     data: { dailyRate, notAllowedFoods },
+  });
+};
+
+export const updateUserController = async (req, res, next) => {
+  const owner = req.user._id;
+
+  await updateUserInfo({
+    owner,
+    currentWeight: Number(req.body.currentWeight),
+    height: Number(req.body.height),
+    age: Number(req.body.age),
+    desiredWeight: Number(req.body.desiredWeight),
+    bloodType: Number(req.body.bloodType),
+  });
+  res.status(200).json({
+    status: 200,
+    message: 'successfully updated daily rate!',
   });
 };

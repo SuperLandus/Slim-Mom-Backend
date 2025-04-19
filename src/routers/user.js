@@ -1,9 +1,15 @@
 import { Router } from 'express';
 import {
   getDailyRateController,
-  getMyDailyRateController} from '../controllers/user.js';
+  getMyDailyRateController,
+  updateUserController,
+} from '../controllers/user.js';
 import validateBody from '../middlewares/validateBody.js';
-import { addMyProductsSchema, getDailyRateSchema } from '../validation/user.js';
+import {
+  addMyProductsSchema,
+  getDailyRateSchema,
+  updateDailyRateSchema,
+} from '../validation/user.js';
 import { addMyProducts } from '../controllers/myProducts/addMyProducts.js';
 import { getMyProducts } from '../controllers/myProducts/getMyProducts.js';
 import { deleteMyProducts } from '../controllers/myProducts/deleteMyProducts.js';
@@ -29,10 +35,11 @@ router.get(
   authenticate,
   ctrlWrapper(getMyDailyRateController),
 );
-router.post(
+router.put(
   '/my-daily-calory-needs',
   authenticate,
-  ctrlWrapper(getMyDailyRateController),
+  validateBody(updateDailyRateSchema),
+  ctrlWrapper(updateUserController),
 );
 
 router.post(

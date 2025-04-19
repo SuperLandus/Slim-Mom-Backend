@@ -21,14 +21,18 @@ export const updateUserInfo = async (payload) => {
   return UserCollection.findOneAndUpdate(
     { _id: payload.owner }, // Query to find the user by their unique ID
     {
-      "infouser.currentWeight": payload.currentWeight,
-      "infouser.height": payload.height,
-      "infouser.age": payload.age,
-      "infouser.desiredWeight": payload.desiredWeight,
-      "infouser.bloodType": payload.bloodType,
-      "infouser.dailyRate": payload.dailyRate,
-      "infouser.notAllowedProducts": payload.notAllowedFoods,
+      'infouser.currentWeight': payload.currentWeight,
+      'infouser.height': payload.height,
+      'infouser.age': payload.age,
+      'infouser.desiredWeight': payload.desiredWeight,
+      'infouser.bloodType': payload.bloodType,
+      'dailyRate': payload.dailyRate,
+      'notAllowedProducts': payload.notAllowedFoods,
     },
     { new: true }, // Return the updated document
   );
+};
+
+export const getUserInfo = async (owner) => {
+  return UserCollection.findById({ _id: owner });
 };
