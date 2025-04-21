@@ -34,7 +34,6 @@ export const registerUserController = async (req, res, next) => {
     const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
       expiresIn: '7d',
     });
-    console.log("----------",userwithoutpass);
     res.status(201).json({
       status: 201,
       message: 'Successfully registered a user!',
