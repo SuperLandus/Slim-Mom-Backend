@@ -93,7 +93,7 @@ export const loginUser = async (payload) => {
 
   // ✅ session ve user birlikte döndürülüyor
   return {
-    ...session._doc, // session detayları
+    session:session, // session detayları
     user: {
       name: user.name,
       email: user.email,
