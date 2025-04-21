@@ -7,6 +7,9 @@ import { FIFTEEN_MINUTES, ONE_DAY } from '../constants/index.js';
 import mongoose from 'mongoose';
 import { randomBytes } from 'crypto';
 
+const ACCESS_TOKEN_EXPIRY = '15m';
+
+const REFRESH_TOKEN_EXPIRY = '30d';
 export const registerUser = async (payload) => {
   try {
     const user = await UserCollection.findOne({ email: payload.email });
@@ -16,7 +19,31 @@ export const registerUser = async (payload) => {
       ...payload,
       password: encryptedPassword,
     });
-    return createdUser;
+    const accessToken = jwt.sign({ userId: createdUser._id }, process.env.JWT_SECRET, {
+      expiresIn: ACCESS_TOKEN_EXPIRY,
+    });
+    const refreshToken = jwt.sign({ userId: createdUser._id }, process.env.JWT_SECRET, {
+      expiresIn: REFRESH_TOKEN_EXPIRY,
+    });
+    
+  const session = await SessionCollection.create({
+    userId: createdUser._id,
+    accessToken,
+    refreshToken,
+    accessTokenValidUntil: new Date(Date.now() + FIFTEEN_MINUTES),
+    refreshTokenValidUntil: new Date(Date.now() + ONE_DAY),
+  });
+  if (!session) {
+    throw createHttpError(500, 'Session creation failed');
+  }
+  console.log('Session toobject :', session.toObject()); 
+  return {
+    session: session.toObject(),
+    user: {
+      name: createdUser.name,
+      email: createdUser.email,
+    },
+  };
   } catch (e) {
     throw createHttpError(
       e.status || 500,
@@ -34,9 +61,7 @@ export const getUser = async (email) => {
   }
 };
 
-const ACCESS_TOKEN_EXPIRY = '15m';
 
-const REFRESH_TOKEN_EXPIRY = '30d';
 
 export const loginUser = async (payload) => {
   const user = await UserCollection.findOne({ email: payload.email });

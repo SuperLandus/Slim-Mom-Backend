@@ -18,24 +18,33 @@ export const registerUserController = async (req, res, next) => {
       return next(createHttpError(409, 'Email in use'));
     }
 
-    const newUser = await registerUser({ name, email, password });
-    console.log(newUser);
+    const {session, user:newUser} = await registerUser({ name, email, password });
     const userwithoutpass = { ...newUser };
     delete userwithoutpass.password;
+    //user can enter the host without login
+    res.cookie('refreshToken', session.refreshToken, {
+      httpOnly: true,
+      expires: new Date(Date.now() + ONE_DAY),
+    });
+    res.cookie('sessionId', session._id, {
+      httpOnly: true,
+      expires: new Date(Date.now() + ONE_DAY),
+    });
 
     const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
       expiresIn: '7d',
     });
-
+    console.log("----------",userwithoutpass);
     res.status(201).json({
       status: 201,
       message: 'Successfully registered a user!',
       data: {
-        id: userwithoutpass._doc._id,
-        name: userwithoutpass._doc.name,
-        email: userwithoutpass._doc.email,
-        createdAt: userwithoutpass._doc.createdAt,
-        updatedAt: userwithoutpass._doc.updatedAt,
+        id: userwithoutpass._id,
+        name: userwithoutpass.name,
+        email: userwithoutpass.email,
+        createdAt: userwithoutpass.createdAt,
+        updatedAt: userwithoutpass.updatedAt,
+        accessToken: session.accessToken,
       },
       token,
     });
@@ -56,8 +65,8 @@ export const loginUserController = async (req, res) => {
     expires: new Date(Date.now() + ONE_DAY),
   });
 
-  // Kullanıcıyı çıkar
-  const user = session.user; // loginUser içinde populated edilmesi gerekiyor
+
+  const user = session.user; 
   const userInfo = {
     name: user.name,
     email: user.email,
