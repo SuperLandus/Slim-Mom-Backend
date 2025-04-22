@@ -15,7 +15,7 @@ tags:
   - name: Users
     description: Operations about users and their products.
 servers:
-  - url: https://slimmom-backend-s8n8.onrender.com
+  - url: https://slim-mom-backend-bhhk.onrender.com
   - url: https://localhost:3000 # veya yerel geliştirici ortamınız için geçici bir URL
 paths:
   /register:
