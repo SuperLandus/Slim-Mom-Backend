@@ -2,7 +2,7 @@
 
 **Slim-Mom** projesine hoş geldiniz. Bu proje, [**SuperLandus**](https://github.com/Super-Landus) adlı ekibin çalışmasıdır.
 
-[![Static Badge](https://img.shields.io/badge/visit-SlimMom%20Swagger-%FF9D23?style=for-the-badge)](https://slim-mom-backend-nbxd.onrender.com/api-docs)
+[![Static Badge](https://img.shields.io/badge/visit-SlimMom%20Swagger-%FF9D23?style=for-the-badge)](https://slim-mom-backend-bhhk.onrender.com/api-docs)
 
 ## ![alt](./src/assets/Backend%20Readme.png)
 
@@ -12,11 +12,11 @@ Slim Mom, kullanıcıların günlük kalori takibini yapmasına yardımcı olan 
 
 ## Proje Katkıda Bulunanlar
 
-| Ad Soyad          | GitHub Profili                                     | Rol                      |
-| :---------------- | :------------------------------------------------- | :----------------------- |
-| Heza GÖLCÜK       | [@Hezaarfenn](https://github.com/Hezaarfenn)       | Scrum Master - Developer |
-| Gizem ÇOBAN       | [@gizemcobannnn](https://github.com/gizemcobannnn) | Team Leader - Developer  |
-| Mete CİVELEK      | [@metlandus](https://github.com/metlandus)         | Developer                |
+| Ad Soyad     | GitHub Profili                                     | Rol                      |
+| :----------- | :------------------------------------------------- | :----------------------- |
+| Heza GÖLCÜK  | [@Hezaarfenn](https://github.com/Hezaarfenn)       | Scrum Master - Developer |
+| Gizem ÇOBAN  | [@gizemcobannnn](https://github.com/gizemcobannnn) | Team Leader - Developer  |
+| Mete CİVELEK | [@metlandus](https://github.com/metlandus)         | Developer                |
 
 ## Özellikler
 
@@ -41,7 +41,7 @@ Slim Mom, kullanıcıların günlük kalori takibini yapmasına yardımcı olan 
 
 ## Backend Render Api Docs Link
 
-[https://slim-mom-backend-nbxd.onrender.com/api-docs/](https://slim-mom-frontend-plum.vercel.app/)
+[https://slim-mom-backend-bhhk.onrender.com/api-docs/](https://slim-mom-frontend-plum.vercel.app/)
 
 ## Vercel Link
 
