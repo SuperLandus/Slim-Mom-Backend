@@ -41,12 +41,8 @@ Slim Mom, kullanıcıların günlük kalori takibini yapmasına yardımcı olan 
 
 ## Backend Render Api Docs Link
 
-[https://slim-mom-backend-bhhk.onrender.com/api-docs/](https://slim-mom-frontend-plum.vercel.app/)
+[https://slim-mom-backend-bhhk.onrender.com/api-docs/](https://slim-mom-backend-bhhk.onrender.com/api-docs)
 
 ## Vercel Link
 
-https://slim-mom-frontend-five.vercel.app/
-
-## Trello Link
-
-https://trello.com/b/M81HH7LH/slim-mom
+https://slim-mom-frontend-eight.vercel.app
