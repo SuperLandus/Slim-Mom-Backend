@@ -35,7 +35,7 @@ router.get(
   authenticate,
   ctrlWrapper(getMyDailyRateController),
 );
-router.put(
+router.post(
   '/my-daily-calory-needs',
   authenticate,
   validateBody(updateDailyRateSchema),
