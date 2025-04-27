@@ -12,7 +12,7 @@ const addMyProducts = async (req, res) => {
     throw createHttpError(400, 'Invalid date!');
   }
 
-  const dateFormatted = new Date(date).toISOString().split('T')[0];
+  const dateFormatted = new Date(date).toLocaleDateString().split('T')[0];
 
   const newProduct = await MyProducts.create({
     productId,
