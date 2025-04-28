@@ -23,7 +23,7 @@ router.post(
   validateBody(loginUserSchema),
   ctrlWrapper(loginUserController),
 );
-router.post('/refresh', ctrlWrapper(refreshUserController));
+router.post('/refresh', authenticate, ctrlWrapper(refreshUserController));
 
 router.post('/logout', authenticate, logoutUser);
 
