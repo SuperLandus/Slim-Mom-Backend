@@ -74,8 +74,17 @@ export const updateUserController = async (req, res, next) => {
     desiredWeight: Number(req.body.desiredWeight),
     bloodType: Number(req.body.bloodType),
   });
+
+  const dailyRate = calculateDailyCalory(
+    req.body.currentWeight,
+    req.body.height,
+    req.body.age,
+    req.body.desiredWeight,
+  );
+
   res.status(200).json({
     status: 200,
     message: 'successfully updated daily rate!',
+    data: dailyRate,
   });
 };
