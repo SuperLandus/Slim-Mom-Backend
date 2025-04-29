@@ -75,7 +75,7 @@ export const updateUserController = async (req, res, next) => {
     bloodType: Number(req.body.bloodType),
   });
 
-  const notAllowedFoods = await getNotAllowedFoodsService(bloodType);
+  const notAllowedFoods = await getNotAllowedFoodsService(req.body.bloodType);
 
   const dailyRate = calculateDailyCalory(
     req.body.currentWeight,
