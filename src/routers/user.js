@@ -44,7 +44,6 @@ router.post(
 
 router.post(
   '/daily-calory-needs',
-  authenticate,
   validateBody(getDailyRateSchema),
   ctrlWrapper(getDailyRateController),
 );
