@@ -15,12 +15,12 @@ export const getDailyRateController = async (req, res, next) => {
 
   const notAllowedFoods = await getNotAllowedFoodsService(bloodType);
 
-  const dailyRate = calculateDailyCalory({
+  const dailyRate = calculateDailyCalory(
     currentWeight,
     height,
     age,
     desiredWeight,
-  });
+  );
 
   res.status(200).json({
     status: 200,
